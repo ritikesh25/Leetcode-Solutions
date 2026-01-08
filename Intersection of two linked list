@@ -1,0 +1,94 @@
+First Method
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+
+        ListNode* temp1 = headA;
+        ListNode* temp2 = headB;
+
+        int n1=0,n2=0;
+
+        while(temp1 != NULL){
+            n1++;
+            temp1 = temp1->next;
+        }
+
+        while(temp2 != NULL){
+            n2++;
+            temp2 = temp2->next;
+        }
+
+        temp1 = headA;
+        temp2 = headB;
+
+        int res = 0;
+
+        if(n1 > n2){
+            res = n1 - n2;
+            while(res > 0){
+                temp1 = temp1->next;
+                res--;
+            }
+        }
+        else{
+            res = n2 - n1;
+            while(res > 0){
+                temp2 = temp2->next;
+                res--;
+            }
+        }
+
+        while(temp1 != NULL && temp2 != NULL){
+            if(temp1 == temp2){
+                return temp1;
+            }
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }
+
+        return NULL;
+
+    }
+};
+
+SECOND METHOD->
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+
+        ListNode* temp1 = headA;
+        ListNode* temp2 = headB;
+
+        map<ListNode*, int> mpp;
+
+        while(temp1 != NULL){
+            mpp.insert({temp1,1});
+            temp1 = temp1->next;
+        }
+
+        while(temp2 != NULL){
+            if(mpp.find(temp2) != mpp.end()) return temp2;
+            temp2 = temp2->next;
+        }
+
+        return NULL;
+        
+    }
+};
