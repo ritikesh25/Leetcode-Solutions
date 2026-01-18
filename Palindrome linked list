@@ -32,6 +32,9 @@ public:
 
 SECOND METHOD -->
 
+In this method firstly find the mid of the list by using fast slow pointer method and then reverse the second half of the list and then compare it values with
+the first half.
+
 class Solution {
 public:
 ListNode* reverseList(ListNode* head) {
